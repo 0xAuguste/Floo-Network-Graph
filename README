@@ -1,0 +1,118 @@
+/**********************************************************
+* Project 2: FlooHub
+* Auguste Brown
+* Comp 15
+* README
+*********************************************************/
+
+Compile/run:
+     - Compile using
+            make
+     - run executable with
+            ./findpath [vertex_data] [edge_data]
+
+For Testing:
+    - Compile using
+            make testgraph
+    - run executable with
+            ./testgraph
+
+    - ./rt c15.vdat c15-10k.adat < test_commands.txt > spec_output.txt
+    - ./findpath c15.vdat c15-10k.adat < test_commands.txt  > my_output.txt
+    - diff spec_output.txt my_output.txt
+
+
+Program Purpose:
+---------------
+findpath is a program which takes location data of students across the globe
+and creates a way to find paths between them using FlooHub. It also includes
+commands which provide a way to see a list of all students in the network and
+find geographic distances between them.
+
+
+Acknowledgements: 
+----------------
+-The Makefile was only partially written by me.
+-The Location class was not written by me.
+
+
+Files:
+----- 
+
+Location.h:
+    Contains class definition for Location
+
+Location.cpp:
+    Contains class implementation for Location
+
+Node.h:
+    Contains struct definition of Node
+
+Graph.h:
+    Contains class definition for Graph
+
+Graph.cpp:
+    Contains class implementation for Graph
+
+testGraph.cpp:
+    Contains unit tests for Graph
+
+test_commands.txt:
+    Conatins commands to be piped into executable to test
+
+main.cpp:
+    Contains implementation of list, dist, and path commands using the Graph
+    class
+
+Makefile
+    Builds the executables testgraph and findpath
+
+README
+    Contains documentation for FlooHub
+
+
+Data Structures:
+---------------
+
+Node:
+    A struct which contains fields to hold the nodes name, location, a list of
+    its neighbors, a bool to tell if it has been visited in the current path,
+    and a pointer to the previous Node in the path.
+
+Graph:
+    Contains a vector of Nodes, and member functions to perform operations on
+    its data, such as find a Node with a given name, print a list of all the
+    Nodes, find the distance between two Nodes, and find paths between two
+    Nodes.
+    
+
+Algorithms:
+----------
+    
+    list: Because the vertices are stored in a vector, I can simply loop
+    through and print the name of each Node to the console.
+
+    dist: This algorithm is implemented internally in the Graph class, but
+    called in main.cpp. The Graph takes in the names of the two Nodes in
+    question, and checks if they actually correspond to valid Nodes. If either
+    name is not valid, it prints -1.00 to the console. Otherwise, it calls
+    the distance_to() function in the location class and prints out the result.
+
+    path: path first finds Nodes with the given names, and then calls a
+    recursive function which uses a Depth First Search algorithm to find
+    max_paths number of paths. If the "from" Node passed into this function
+    is the same Node as the "to" Node, it has found a path, which it prints.
+    Otherwise, it attempts to find a path from each of its neighbors,
+    incrementing num_paths each time it finds a path. Once it has found all
+    paths, or num_paths == max_paths, it leaves the function.
+
+Testing:
+-------
+
+    To test, I wrote testGraph.cpp which contains unit tests for all the
+    public functions in Graph by creating an instance of Graph and calling a
+    test function for each function in Graph.h. I tested each function on an
+    empty Graph, a Graph with one one Node, and a Graph with multiple Nodes.
+    Additionally, I created a file called test_commands.txt which I piped into
+    my implementation and the reference implementation and compared the
+    output. 

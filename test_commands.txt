@@ -1,0 +1,12 @@
+list
+
+dist CO-Denver-sbc NY-Jamestown-em
+dist NY-Jamestown-em CO-Denver-sbc
+
+dist MD-Baltimore-hdg Turkey-Izmir-du
+dist Turkey-Izmir-du MD-Baltimore-hdg
+
+dist MD-Baltimore-hdg fakecity
+
+path MA-Boston-ed CA-Albany-ahb 30
+path CA-Albany-ahb fakecity 30
